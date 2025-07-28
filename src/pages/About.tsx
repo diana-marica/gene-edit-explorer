@@ -7,7 +7,7 @@ import { ApiStatus } from "@/components/workspace/ApiStatus";
 const About = () => {
   const technologies = ["React & TypeScript", "Tailwind CSS", "AlphaFold API", "Ensembl API", "ChEMBL Database", "PubChem API", "OpenAI GPT", "3D Molecular Viewer"];
   const team = [{
-    name: "Dr. Sarah Chen",
+    name: "Diana Marica Ph.D",
     role: "Computational Biology Lead",
     description: "PhD in Bioinformatics, specializing in CRISPR design algorithms"
   }, {
