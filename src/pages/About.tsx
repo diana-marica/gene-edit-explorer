@@ -2,7 +2,8 @@ import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Github, Mail, Award, Users, Cpu } from "lucide-react";
+import { BookOpen, Github, Mail, Award, Users, Cpu, Activity } from "lucide-react";
+import { ApiStatus } from "@/components/workspace/ApiStatus";
 
 const About = () => {
   const technologies = [
@@ -139,6 +140,15 @@ const About = () => {
               </Card>
             ))}
           </div>
+        </div>
+
+        {/* System Status */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3">
+            <Activity className="h-8 w-8 text-primary" />
+            System Status
+          </h2>
+          <ApiStatus />
         </div>
 
         {/* Contact */}

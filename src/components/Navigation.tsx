@@ -1,6 +1,42 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Dna, Beaker, Zap, Activity } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Dna, Activity } from "lucide-react";
+import { useApiStatus } from "@/hooks/useApiStatus";
+
+const ApiStatusIndicator = () => {
+  const { apiHealth } = useApiStatus();
+  
+  const getStatusColor = () => {
+    switch (apiHealth.overall) {
+      case 'healthy': return 'bg-success-dark';
+      case 'issues': return 'bg-warning-dark';
+      default: return 'bg-muted';
+    }
+  };
+
+  const getStatusText = () => {
+    switch (apiHealth.overall) {
+      case 'healthy': return 'All APIs Online';
+      case 'issues': return 'Some API Issues';
+      default: return 'Checking APIs...';
+    }
+  };
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Activity className="h-4 w-4" />
+          <div className={`w-2 h-2 rounded-full ${getStatusColor()}`} />
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{getStatusText()}</p>
+      </TooltipContent>
+    </Tooltip>
+  );
+};
 
 const Navigation = () => {
   return (
@@ -24,6 +60,7 @@ const Navigation = () => {
             <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">
               About
             </Link>
+            <ApiStatusIndicator />
             <Button variant="scientific" size="sm">
               Get Started
             </Button>
