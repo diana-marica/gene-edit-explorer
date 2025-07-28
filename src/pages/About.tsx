@@ -21,12 +21,12 @@ const About = () => {
   }];
   return <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Background Video */}
-      <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-1/3 object-cover opacity-30">
+      <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-1/3 object-cover opacity-50">
         <source src="/32479-392186775_medium.mp4" type="video/mp4" />
       </video>
       
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-primary/60" />
+      <div className="absolute inset-0 bg-black/40" />
       
       {/* Content */}
       <div className="relative z-10">
