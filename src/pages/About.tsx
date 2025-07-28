@@ -30,10 +30,26 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
+    <div className="relative min-h-screen bg-background overflow-hidden">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-20"
+      >
+        <source src="/244736_medium.mp4" type="video/mp4" />
+      </video>
       
-      <div className="container mx-auto px-4 py-12">
+      {/* Overlay for better content readability */}
+      <div className="absolute inset-0 bg-background/80" />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <Navigation />
+        
+        <div className="container mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-foreground mb-4">
@@ -176,6 +192,7 @@ const About = () => {
             </div>
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   );
