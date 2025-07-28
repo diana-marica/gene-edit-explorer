@@ -15,7 +15,7 @@ const About = () => {
     role: "Structural Biology Expert",
     description: "Expert in protein structure analysis and drug discovery"
   }, {
-    name: "Dr. Emily Park",
+    name: "Diana Marica Ph.D",
     role: "Machine Learning Scientist",
     description: "Developing predictive models for genome editing outcomes"
   }];
