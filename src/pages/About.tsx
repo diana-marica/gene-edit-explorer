@@ -4,41 +4,24 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Github, Mail, Award, Users, Cpu, Activity } from "lucide-react";
 import { ApiStatus } from "@/components/workspace/ApiStatus";
-
 const About = () => {
-  const technologies = [
-    "React & TypeScript", "Tailwind CSS", "AlphaFold API", "Ensembl API",
-    "ChEMBL Database", "PubChem API", "OpenAI GPT", "3D Molecular Viewer"
-  ];
-
-  const team = [
-    {
-      name: "Dr. Sarah Chen",
-      role: "Computational Biology Lead",
-      description: "PhD in Bioinformatics, specializing in CRISPR design algorithms"
-    },
-    {
-      name: "Dr. Michael Rodriguez",
-      role: "Structural Biology Expert",
-      description: "Expert in protein structure analysis and drug discovery"
-    },
-    {
-      name: "Dr. Emily Park",
-      role: "Machine Learning Scientist", 
-      description: "Developing predictive models for genome editing outcomes"
-    }
-  ];
-
-  return (
-    <div className="relative min-h-screen bg-background overflow-hidden">
+  const technologies = ["React & TypeScript", "Tailwind CSS", "AlphaFold API", "Ensembl API", "ChEMBL Database", "PubChem API", "OpenAI GPT", "3D Molecular Viewer"];
+  const team = [{
+    name: "Dr. Sarah Chen",
+    role: "Computational Biology Lead",
+    description: "PhD in Bioinformatics, specializing in CRISPR design algorithms"
+  }, {
+    name: "Dr. Michael Rodriguez",
+    role: "Structural Biology Expert",
+    description: "Expert in protein structure analysis and drug discovery"
+  }, {
+    name: "Dr. Emily Park",
+    role: "Machine Learning Scientist",
+    description: "Developing predictive models for genome editing outcomes"
+  }];
+  return <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-1/2 object-cover"
-      >
+      <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-1/2 object-cover">
         <source src="/244736_medium.mp4" type="video/mp4" />
       </video>
       
@@ -49,10 +32,10 @@ const About = () => {
         <div className="container mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl font-bold mb-4 text-slate-200">
             About GenEditLab
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto text-slate-200">
             We're building the next generation of bioinformatics tools to accelerate 
             genome editing research and therapeutic discovery. Our platform integrates 
             cutting-edge algorithms with intuitive interfaces for researchers worldwide.
@@ -91,11 +74,9 @@ const About = () => {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {technologies.map((tech, index) => (
-                  <Badge key={index} variant="secondary">
+                {technologies.map((tech, index) => <Badge key={index} variant="secondary">
                     {tech}
-                  </Badge>
-                ))}
+                  </Badge>)}
               </div>
             </CardContent>
           </Card>
@@ -134,10 +115,9 @@ const About = () => {
 
         {/* Team */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-8">Research Team</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-slate-200">Research Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {team.map((member, index) => (
-              <Card key={index} className="shadow-card text-center">
+            {team.map((member, index) => <Card key={index} className="shadow-card text-center">
                 <CardHeader>
                   <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
                     <Users className="h-10 w-10 text-white" />
@@ -150,8 +130,7 @@ const About = () => {
                 <CardContent>
                   <p className="text-sm text-muted-foreground">{member.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
 
@@ -191,8 +170,6 @@ const About = () => {
         </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default About;
