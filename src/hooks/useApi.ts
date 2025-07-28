@@ -11,9 +11,13 @@ import { CrisprDesignParams, GuideRNA } from '@/types/api';
 export const useGeneSearch = (symbol: string, enabled: boolean = false) => {
   return useQuery({
     queryKey: ['gene', symbol],
-    queryFn: () => EnsemblService.searchGene(symbol),
+    queryFn: async () => {
+      const result = await EnsemblService.searchGene(symbol);
+      return handleApiResponse(result);
+    },
     enabled: enabled && symbol.length > 0,
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 3,
   });
 };
 
@@ -21,9 +25,13 @@ export const useGeneSearch = (symbol: string, enabled: boolean = false) => {
 export const useProteinSearch = (query: string, enabled: boolean = false) => {
   return useQuery({
     queryKey: ['protein', query],
-    queryFn: () => UniProtService.searchProtein(query),
+    queryFn: async () => {
+      const result = await UniProtService.searchProtein(query);
+      return handleApiResponse(result);
+    },
     enabled: enabled && query.length > 0,
     staleTime: 5 * 60 * 1000,
+    retry: 3,
   });
 };
 
@@ -31,9 +39,13 @@ export const useProteinSearch = (query: string, enabled: boolean = false) => {
 export const useProteinDetails = (uniprotId: string, enabled: boolean = false) => {
   return useQuery({
     queryKey: ['protein-details', uniprotId],
-    queryFn: () => UniProtService.getProteinDetails(uniprotId),
+    queryFn: async () => {
+      const result = await UniProtService.getProteinDetails(uniprotId);
+      return handleApiResponse(result);
+    },
     enabled: enabled && uniprotId.length > 0,
     staleTime: 10 * 60 * 1000, // 10 minutes
+    retry: 2,
   });
 };
 
@@ -41,7 +53,10 @@ export const useProteinDetails = (uniprotId: string, enabled: boolean = false) =
 export const useAlphaFoldStructure = (uniprotId: string, enabled: boolean = false) => {
   return useQuery({
     queryKey: ['alphafold', uniprotId],
-    queryFn: () => AlphaFoldService.getStructure(uniprotId),
+    queryFn: async () => {
+      const result = await AlphaFoldService.getStructure(uniprotId);
+      return handleApiResponse(result);
+    },
     enabled: enabled && uniprotId.length > 0,
     staleTime: 60 * 60 * 1000, // 1 hour
     retry: 1, // Only retry once for AlphaFold
@@ -52,9 +67,13 @@ export const useAlphaFoldStructure = (uniprotId: string, enabled: boolean = fals
 export const useLigandSearch = (targetName: string, enabled: boolean = false) => {
   return useQuery({
     queryKey: ['ligands', targetName],
-    queryFn: () => ChemblService.searchLigands(targetName),
+    queryFn: async () => {
+      const result = await ChemblService.searchLigands(targetName);
+      return handleApiResponse(result);
+    },
     enabled: enabled && targetName.length > 0,
     staleTime: 10 * 60 * 1000,
+    retry: 2,
   });
 };
 
