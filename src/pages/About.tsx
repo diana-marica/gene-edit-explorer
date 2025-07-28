@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Github, Mail, Award, Users, Cpu, Activity } from "lucide-react";
 import { ApiStatus } from "@/components/workspace/ApiStatus";
-import aboutHeroBg from "@/assets/about-hero-bg.jpg";
 const About = () => {
   const technologies = ["React & TypeScript", "Tailwind CSS", "AlphaFold API", "Ensembl API", "ChEMBL Database", "PubChem API", "OpenAI GPT", "3D Molecular Viewer"];
   const team = [{
@@ -21,14 +20,13 @@ const About = () => {
     description: "Developing predictive models for genome editing outcomes"
   }];
   return <div className="relative min-h-screen bg-background overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute top-0 left-0 w-full h-1/2 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${aboutHeroBg})` }}
-      />
+      {/* Background Video */}
+      <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-1/3 object-cover opacity-30">
+        <source src="/32479-392186775_medium.mp4" type="video/mp4" />
+      </video>
       
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-primary/20 to-background" />
+      <div className="absolute inset-0 bg-gradient-primary/60" />
       
       {/* Content */}
       <div className="relative z-10">
