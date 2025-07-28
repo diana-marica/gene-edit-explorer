@@ -15,8 +15,23 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="bg-gradient-primary text-white py-20">
-      <div className="container mx-auto px-4 text-center">
+    <div className="relative bg-gradient-primary text-white py-20 overflow-hidden">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+      >
+        <source src="/32479-392186775_medium.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-primary/60" />
+      
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold mb-6">
             Advanced CRISPR Design & Protein Analysis
