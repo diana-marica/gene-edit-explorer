@@ -2,8 +2,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dna, ExternalLink, Download, Zap } from "lucide-react";
+import { useProteinDetails, useAlphaFoldStructure } from "@/hooks/useApi";
+import { useState } from "react";
 
-const ProteinStructure = () => {
+interface ProteinStructureProps {
+  uniprotId?: string;
+}
+
+const ProteinStructure = ({ uniprotId = "P04637" }: ProteinStructureProps) => {
+  const [showLigandAnalysis, setShowLigandAnalysis] = useState(false);
+  
+  const proteinQuery = useProteinDetails(uniprotId, !!uniprotId);
+  const alphafoldQuery = useAlphaFoldStructure(uniprotId, !!uniprotId);
+
+  const handleSuggestLigands = () => {
+    setShowLigandAnalysis(true);
+  };
   const mockProteinData = {
     uniprotId: "P38398",
     pdbId: "6OBT",

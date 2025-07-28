@@ -3,8 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Atom, ExternalLink, Search, Beaker, Target } from "lucide-react";
+import { useLigandSearch } from "@/hooks/useApi";
+import { useState } from "react";
 
-const LigandAnalysis = () => {
+interface LigandAnalysisProps {
+  targetName?: string;
+}
+
+const LigandAnalysis = ({ targetName = "TP53" }: LigandAnalysisProps) => {
+  const [searchQuery, setSearchQuery] = useState(targetName);
+  
+  const ligandQuery = useLigandSearch(searchQuery, !!searchQuery);
   const mockBindingPockets = [
     {
       id: 1,

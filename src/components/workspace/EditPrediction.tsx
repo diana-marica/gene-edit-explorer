@@ -3,8 +3,24 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Zap, AlertTriangle, Info, TrendingUp } from "lucide-react";
+import { useEditPrediction } from "@/hooks/useApi";
+import { GuideRNA } from "@/types/api";
 
-const EditPrediction = () => {
+interface EditPredictionProps {
+  selectedGuide?: GuideRNA;
+}
+
+const EditPrediction = ({ selectedGuide }: EditPredictionProps) => {
+  const editPredictionMutation = useEditPrediction();
+
+  const handleAnalyzeProtein = () => {
+    if (selectedGuide) {
+      editPredictionMutation.mutate({
+        guide: selectedGuide,
+        sequence: "ATGGCCTACTGGAAGAACCAGAGG" // Mock sequence
+      });
+    }
+  };
   const mockPredictions = {
     deletions: [
       { size: 1, frequency: 45, sequence: "-" },

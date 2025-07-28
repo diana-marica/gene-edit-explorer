@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,7 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Search, Target, AlertTriangle, CheckCircle } from "lucide-react";
+import { Search, Target, AlertTriangle, CheckCircle, Loader2 } from "lucide-react";
+import { useCrisprDesign, useGeneSearch } from "@/hooks/useApi";
+import { GuideRNA } from "@/types/api";
 
 interface CrisprDesignProps {
   geneQuery?: string;
@@ -16,59 +18,40 @@ const CrisprDesign = ({ geneQuery }: CrisprDesignProps) => {
   const [targetGene, setTargetGene] = useState(geneQuery || "");
   const [organism, setOrganism] = useState("human");
   const [targetRegion, setTargetRegion] = useState("");
-  const [results, setResults] = useState<any[]>([]);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [results, setResults] = useState<GuideRNA[]>([]);
 
-  const mockResults = [
-    {
-      id: 1,
-      sequence: "GCACTGGAGGTCGAGATGCG",
-      pam: "CGG",
-      cutPosition: 245,
-      onTargetScore: 0.87,
-      offTargetCount: 3,
-      maxMismatch: 2,
-      efficiency: "High"
-    },
-    {
-      id: 2,
-      sequence: "TCGATCGGAGCTGAACTACG",
-      pam: "TGG",
-      cutPosition: 189,
-      onTargetScore: 0.72,
-      offTargetCount: 8,
-      maxMismatch: 3,
-      efficiency: "Medium"
-    },
-    {
-      id: 3,
-      sequence: "AGTCGATGCAGATCGACTGG",
-      pam: "AGG",
-      cutPosition: 312,
-      onTargetScore: 0.94,
-      offTargetCount: 1,
-      maxMismatch: 1,
-      efficiency: "High"
+  const crisprMutation = useCrisprDesign();
+  const geneSearchQuery = useGeneSearch(targetGene, false);
+
+  useEffect(() => {
+    if (geneQuery) {
+      setTargetGene(geneQuery);
     }
-  ];
+  }, [geneQuery]);
+
+  useEffect(() => {
+    if (crisprMutation.isSuccess && crisprMutation.data?.success) {
+      setResults(crisprMutation.data.data);
+    }
+  }, [crisprMutation.isSuccess, crisprMutation.data]);
 
   const handleAnalyze = async () => {
     if (!targetGene.trim()) return;
     
-    setIsAnalyzing(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setResults(mockResults);
-    setIsAnalyzing(false);
+    crisprMutation.mutate({
+      gene: targetGene,
+      organism,
+      region: targetRegion || undefined,
+    });
   };
 
-  const getEfficiencyBadge = (efficiency: string) => {
+  const getEfficiencyBadge = (efficiency: 'high' | 'medium' | 'low') => {
     const variants = {
-      High: "bg-green-100 text-green-800",
-      Medium: "bg-yellow-100 text-yellow-800",
-      Low: "bg-red-100 text-red-800"
+      high: "bg-green-100 text-green-800",
+      medium: "bg-yellow-100 text-yellow-800",
+      low: "bg-red-100 text-red-800"
     };
-    return variants[efficiency as keyof typeof variants] || variants.Medium;
+    return variants[efficiency] || variants.medium;
   };
 
   return (
@@ -123,12 +106,21 @@ const CrisprDesign = ({ geneQuery }: CrisprDesignProps) => {
           
           <Button 
             onClick={handleAnalyze} 
-            disabled={!targetGene.trim() || isAnalyzing}
+            disabled={!targetGene.trim() || crisprMutation.isPending}
             className="w-full md:w-auto"
             variant="scientific"
           >
-            <Search className="h-4 w-4" />
-            {isAnalyzing ? "Analyzing..." : "Design Guide RNAs"}
+            {crisprMutation.isPending ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Designing Guide RNAs...
+              </>
+            ) : (
+              <>
+                <Search className="h-4 w-4" />
+                Design Guide RNAs
+              </>
+            )}
           </Button>
         </CardContent>
       </Card>
@@ -148,10 +140,10 @@ const CrisprDesign = ({ geneQuery }: CrisprDesignProps) => {
                   <TableRow>
                     <TableHead>Guide Sequence (5' → 3')</TableHead>
                     <TableHead>PAM</TableHead>
-                    <TableHead>Cut Position</TableHead>
+                    <TableHead>Position</TableHead>
                     <TableHead>On-Target Score</TableHead>
                     <TableHead>Off-Targets</TableHead>
-                    <TableHead>Max Mismatch</TableHead>
+                    <TableHead>Max Off-Target</TableHead>
                     <TableHead>Efficiency</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
@@ -165,7 +157,7 @@ const CrisprDesign = ({ geneQuery }: CrisprDesignProps) => {
                       <TableCell className="font-mono font-semibold text-primary">
                         {result.pam}
                       </TableCell>
-                      <TableCell>{result.cutPosition}</TableCell>
+                      <TableCell>{result.position}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
                           {result.onTargetScore >= 0.8 ? (
@@ -177,7 +169,7 @@ const CrisprDesign = ({ geneQuery }: CrisprDesignProps) => {
                         </div>
                       </TableCell>
                       <TableCell>{result.offTargetCount}</TableCell>
-                      <TableCell>{result.maxMismatch}</TableCell>
+                      <TableCell>{result.offTargetMaxScore.toFixed(2)}</TableCell>
                       <TableCell>
                         <Badge className={getEfficiencyBadge(result.efficiency)}>
                           {result.efficiency}
