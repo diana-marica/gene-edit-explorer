@@ -37,7 +37,7 @@ const About = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-1/2 object-cover"
       >
         <source src="/244736_medium.mp4" type="video/mp4" />
       </video>
