@@ -1,6 +1,6 @@
 import { ProteinInfo, UniProtResponse, ApiResponse } from '@/types/api';
 
-const UNIPROT_BASE_URL = 'https://rest.uniprot.org';
+const UNIPROT_BASE_URL = '/api/uniprot';
 
 export class UniProtService {
   private static async fetchFromUniProt(endpoint: string): Promise<any> {

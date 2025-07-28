@@ -62,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'success-light': 'hsl(var(--success-light))',
+				'success-dark': 'hsl(var(--success-dark))',
+				'warning-light': 'hsl(var(--warning-light))',
+				'warning-dark': 'hsl(var(--warning-dark))',
+				'error-light': 'hsl(var(--error-light))',
+				'error-dark': 'hsl(var(--error-dark))'
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',

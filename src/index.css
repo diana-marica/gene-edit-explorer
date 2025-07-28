@@ -50,6 +50,14 @@ All colors MUST be HSL.
     --shadow-scientific: 0 4px 20px -4px hsl(210 100% 45% / 0.15);
     --shadow-card: 0 2px 10px -2px hsl(210 20% 15% / 0.1);
 
+    /* Status colors for efficiency badges */
+    --success-light: 120 60% 92%;
+    --success-dark: 120 65% 25%;
+    --warning-light: 45 95% 88%;
+    --warning-dark: 45 85% 30%;
+    --error-light: 0 85% 92%;
+    --error-dark: 0 75% 35%;
+
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 

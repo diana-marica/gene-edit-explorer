@@ -1,6 +1,6 @@
 import { AlphaFoldStructure, ApiResponse } from '@/types/api';
 
-const ALPHAFOLD_BASE_URL = 'https://alphafold.ebi.ac.uk/api';
+const ALPHAFOLD_BASE_URL = '/api/alphafold';
 
 export class AlphaFoldService {
   static async getStructure(uniprotId: string): Promise<ApiResponse<AlphaFoldStructure>> {

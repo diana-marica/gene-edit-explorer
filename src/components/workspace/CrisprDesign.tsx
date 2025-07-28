@@ -47,9 +47,9 @@ const CrisprDesign = ({ geneQuery }: CrisprDesignProps) => {
 
   const getEfficiencyBadge = (efficiency: 'high' | 'medium' | 'low') => {
     const variants = {
-      high: "bg-green-100 text-green-800",
-      medium: "bg-yellow-100 text-yellow-800",
-      low: "bg-red-100 text-red-800"
+      high: "bg-success-light text-success-dark",
+      medium: "bg-warning-light text-warning-dark",
+      low: "bg-error-light text-error-dark"
     };
     return variants[efficiency] || variants.medium;
   };
@@ -161,9 +161,9 @@ const CrisprDesign = ({ geneQuery }: CrisprDesignProps) => {
                       <TableCell>
                         <div className="flex items-center gap-2">
                           {result.onTargetScore >= 0.8 ? (
-                            <CheckCircle className="h-4 w-4 text-green-600" />
+                            <CheckCircle className="h-4 w-4 text-success-dark" />
                           ) : (
-                            <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                            <AlertTriangle className="h-4 w-4 text-warning-dark" />
                           )}
                           {result.onTargetScore.toFixed(2)}
                         </div>

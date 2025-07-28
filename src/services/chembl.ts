@@ -1,6 +1,6 @@
 import { Ligand, ChemblResponse, ApiResponse } from '@/types/api';
 
-const CHEMBL_BASE_URL = 'https://www.ebi.ac.uk/chembl/api/data';
+const CHEMBL_BASE_URL = '/api/chembl/data';
 
 export class ChemblService {
   private static async fetchFromChembl(endpoint: string): Promise<any> {

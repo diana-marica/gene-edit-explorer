@@ -1,6 +1,6 @@
 import { GeneInfo, EnsemblGeneResponse, ApiResponse } from '@/types/api';
 
-const ENSEMBL_BASE_URL = 'https://rest.ensembl.org';
+const ENSEMBL_BASE_URL = '/api/ensembl';
 
 export class EnsemblService {
   private static async fetchFromEnsembl(endpoint: string): Promise<any> {
