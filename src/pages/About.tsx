@@ -37,13 +37,13 @@ const About = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-20"
+        className="absolute inset-0 w-full h-full object-cover opacity-50"
       >
         <source src="/244736_medium.mp4" type="video/mp4" />
       </video>
       
       {/* Overlay for better content readability */}
-      <div className="absolute inset-0 bg-background/80" />
+      <div className="absolute inset-0 bg-black/30" />
       
       {/* Content */}
       <div className="relative z-10">
