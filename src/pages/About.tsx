@@ -28,7 +28,7 @@ const About = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover opacity-30"
       >
-        <source src="/244736_medium.mp4" type="video/mp4" />
+        <source src="/32479-392186775_medium.mp4" type="video/mp4" />
       </video>
       
       {/* Overlay for better text readability */}
