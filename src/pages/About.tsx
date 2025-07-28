@@ -21,13 +21,7 @@ const About = () => {
   }];
   return <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-1/3 object-cover opacity-30"
-      >
+      <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-1/3 object-cover opacity-30">
         <source src="/32479-392186775_medium.mp4" type="video/mp4" />
       </video>
       
@@ -41,10 +35,10 @@ const About = () => {
         <div className="container mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4 text-slate-200">
+          <h1 className="text-4xl font-bold mb-4 text-slate-600">
             About GenEditLab
           </h1>
-          <p className="text-xl max-w-3xl mx-auto text-slate-200">
+          <p className="text-xl max-w-3xl mx-auto text-gray-600">
             We're building the next generation of bioinformatics tools to accelerate 
             genome editing research and therapeutic discovery. Our platform integrates 
             cutting-edge algorithms with intuitive interfaces for researchers worldwide.
@@ -124,7 +118,7 @@ const About = () => {
 
         {/* Team */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-8 text-slate-200">Research Team</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-600">Research Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {team.map((member, index) => <Card key={index} className="shadow-card text-center">
                 <CardHeader>
