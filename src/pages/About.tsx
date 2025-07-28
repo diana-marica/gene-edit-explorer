@@ -26,7 +26,7 @@ const About = () => {
         loop
         muted
         playsInline
-        className="absolute top-0 left-0 w-full h-1/2 object-cover opacity-30"
+        className="absolute top-0 left-0 w-full h-1/3 object-cover opacity-30"
       >
         <source src="/32479-392186775_medium.mp4" type="video/mp4" />
       </video>
