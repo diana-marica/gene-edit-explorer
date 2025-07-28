@@ -11,7 +11,7 @@ const About = () => {
     role: "Computational Biology Lead",
     description: "PhD in Bioinformatics, specializing in CRISPR design algorithms"
   }, {
-    name: "Dr. Michael Rodriguez",
+    name: "Diana Marica Ph.D",
     role: "Structural Biology Expert",
     description: "Expert in protein structure analysis and drug discovery"
   }, {
